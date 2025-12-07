@@ -33,6 +33,11 @@ While effective, these methods often view customers in isolation. They miss the 
 
 **Graph Data Science** enhances this by treating customers as nodes in a network. By analyzing the structure of relationships (e.g., "Users who shop at Merchant X tend to stay loyal," or "This user behaves like these other users who recently churned"), we can extract stronger signals than demographics alone can provide.
 
+<figure>
+    <img src="smurf-networks.png" alt="Smurf networks" />
+    <figcaption>Potential "Smurf" fraud networks.</figcaption>
+</figure>
+
 ### Caveats & Challenges
 1.  **Imbalanced Data:** In a healthy bank, 95% to 99% of customers are active. This "Class Imbalance" makes it hard for models to learn what a churner looks like (finding a needle in a haystack).
 2.  **Definition of Churn:** Since churn is silent, defining the target variable is subjective. Is a user churned after 30 days of silence? 90 days? 1 year? The definition heavily impacts model performance.

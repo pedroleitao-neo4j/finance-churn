@@ -1,0 +1,25 @@
+name: finance-churn
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - jupyter
+  - jupyterlab
+  - notebook
+  - ipykernel
+  - numpy
+  - networkx
+  - python-dotenv
+  - pandas
+  - tqdm
+  - kaggle
+  - matplotlib
+  - seaborn
+  - shap
+  - scikit-learn
+  - scipy
+  - xgboost
+  - pip
+  - pip:
+    - neo4j

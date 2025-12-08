@@ -56,9 +56,9 @@ Our ultimate objective is to highlight how graph data science and Neo4j can be u
 
 The project follows a complete data science pipeline from data ingestion to model inference:
 
-### 1. Data Acquisition & Processing
+### 1. Data Acquisition & Processing ([`donwloader.ipynb`](donwloader.ipynb))
 *   **Source:** [Transactions Fraud Datasets](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets) (via Kaggle).
-*   **Processing ([`donwloader.ipynb`](donwloader.ipynb)):**
+*   **Processing:**
     *   Cleans raw CSV data (currency formatting, date parsing).
     *   Defines "Churn" based on user inactivity (e.g., no transactions for > `CHURN_THRESHOLD_DAYS`).
     *   Merges User, Card, and Transaction data into a single `processed_transactions_data.csv` which can be loaded into Neo4j (see [`NOTES.md`](NOTES.md)).

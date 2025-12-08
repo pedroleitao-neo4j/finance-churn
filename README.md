@@ -1,5 +1,7 @@
 # Finance Churn Prediction with Graph Data Science
 
+![customer-churn](customer-churn.png)
+
 This project implements a churn prediction system for the financial sector, using Neo4j's Graph Data Science (GDS) library. It leverages graph-based features ([embeddings](https://neo4j.com/docs/graph-data-science/current/machine-learning/node-embeddings/) and [centrality](https://neo4j.com/docs/graph-data-science/current/algorithms/centrality/ )) alongside traditional demographic data to identify active users at risk of churning. The dataset used is sourced from Kaggle's [computingvictor/transactions-fraud-datasets](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets), this dataset was chosen as it includes enough structure (merchants, transactions, cards and users) to derive an interesting graph architecture. However it does not include a specific churn label, so we engineered one based on user inactivity.
 
 ## The ins and outs of Churn Prediction

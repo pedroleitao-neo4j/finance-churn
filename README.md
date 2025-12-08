@@ -24,7 +24,7 @@ Therefore, financial churn prediction is not just about detecting closed account
 
 ### Typical Methods
 
-Traditional approaches to predicting churn often rely on tabular data and RFM analysis:
+Traditional approaches to predicting churn often rely on tabular data and [RFM analysis](https://www.investopedia.com/terms/r/rfm-recency-frequency-monetary-value.asp):
 * **Recency:** How long since the last transaction?
 * **Frequency:** How often do they transact?
 * **Monetary:** How much do they spend?

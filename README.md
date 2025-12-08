@@ -4,6 +4,10 @@
 
 This project implements a churn prediction system for the financial sector, using Neo4j's Graph Data Science (GDS) library. It leverages graph-based features ([embeddings](https://neo4j.com/docs/graph-data-science/current/machine-learning/node-embeddings/) and [centrality](https://neo4j.com/docs/graph-data-science/current/algorithms/centrality/ )) alongside traditional demographic data to identify active users at risk of churning. The dataset used is sourced from Kaggle's [computingvictor/transactions-fraud-datasets](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets), this dataset was chosen as it includes enough structure (merchants, transactions, cards and users) to derive an interesting graph architecture. However it does not include a specific churn label, so we engineered one based on user inactivity.
 
+There are two main Jupyter notebooks, which together implement the full data science pipeline:
+*   [`donwloader.ipynb`](donwloader.ipynb): Downloads and processes the raw dataset, defining churn labels based on inactivity, and generating a CSV file for Neo4j ingestion.
+*   [`train-evaluate.ipynb`](train-evaluate.ipynb): Connects to Neo4j, builds the graph model, engineers features using GDS algorithms, trains a Random Forest classifier, and performs inference to identify high-risk active users.
+
 ## The ins and outs of Churn Prediction
 
 Customer Churn (or customer attrition) refers to the phenomenon where customers stop doing business with a company. In the context of finance and banking, this is critical because acquiring a new customer is significantly more expensive than retaining an existing one.
@@ -75,7 +79,7 @@ The data is loaded into a Neo4j graph database with the following structure:
 *   **GDS Optimization:** A simplified relationship `(:User)-[:SHOPPED_AT {weight: count}]->(:Merchant)` is materialized to represent the strength of user-merchant interactions for efficient graph algorithms. This will further help capture user behavior patterns in the graph structure, and the relative importance of merchants to users.
 
 ### 3. Graph Data Science Pipeline ([`train-evaluate.ipynb`](train-evaluate.ipynb))
-The model training is performed entirely within Neo4j using the GDS Python Client:
+The model training is performed entirely within Neo4j orchestrated by the Neo4j Python Client:
 
 *   **Class Imbalance Handling:** A `TrainingCohort` is created by selecting 100% of churned users and undersampling active users (e.g., 5%) to create a balanced training set (the original `computingvictor/transactions-fraud-datasets` is highly imbalanced for our churn prediction task).
 *   **Feature Engineering:**
@@ -91,7 +95,7 @@ The model training is performed entirely within Neo4j using the GDS Python Clien
 *   The trained model is applied to the **Full Graph** (all users, not just the training cohort).
 *   The system predicts a "Risk Score" (probability of churn) for currently **Active** users.
 
-In our case we run both training and inference entirely withing Neo4j using the GDS library, orchestrated via the Neo4j Python Client in `train-evaluate.ipynb`. In a production scenario, model training could be scheduled periodically (e.g., monthly) to refresh the model with the latest data, while inference could be run more frequently (e.g., daily) to identify at-risk users in near real-time. Customers would very possibly run training and inference outside of Neo4j, exporting embeddings and features to a dedicated ML environment. However, running everything within Neo4j simplifies the architecture and showcases the power of GDS for end-to-end graph-based machine learning.
+In our case we run both training and inference entirely withing Neo4j using the GDS library, orchestrated via the Neo4j Python library in `train-evaluate.ipynb`. In a production scenario, model training could be scheduled periodically (e.g., monthly) to refresh the model with the latest data, while inference could be run more frequently (e.g., daily) to identify at-risk users in near real-time. Customers would very possibly run training and inference outside of Neo4j, exporting embeddings and features to a dedicated ML environment. However, running everything within Neo4j simplifies the architecture and showcases the power of GDS for end-to-end graph-based machine learning.
 
 ## Outcome
 

@@ -11,7 +11,7 @@ Customer Churn (or customer attrition) refers to the phenomenon where customers 
   <figcaption>Visualizing the transaction network between users and merchants (clients are *red* nodes).</figcaption>
 </figure>
 
-### What it is in Finance
+### What Customer Churn means in Finance
 
 In subscription-based industries (like Netflix or Spotify), churn is explicit: a user hits "Cancel." In banking and credit cards, however, churn is often **silent** (or non-contractual). A customer rarely calls to say, "I am leaving.". Instead, they simply stop using the card, move their direct deposit elsewhere, or leave an account dormant (zero balance or inactivity) for an extended period.
 
@@ -46,11 +46,11 @@ While effective, these methods often view customers in isolation. They miss the 
 
 ## Purpose of this Project
 
-The primary goal of this model is to predict customer churn by analyzing transaction patterns. Unlike traditional methods that only look at individual user behavior, our approach uses graph features to understand the relationships between users and merchants. By identifying high-risk active users, financial institutions can take proactive measures (e.g., targeted campaigns, personalized offers or other incentives) to retain them.
+The primary goal of this model is to predict customer churn by analyzing transaction patterns. Unlike traditional methods that only look at individual user behavior, our approach uses graph features to understand the relationships between users, cards, and merchants. By identifying high-risk active users, financial institutions can take proactive measures (e.g., targeted campaigns, personalized offers or other incentives) to retain them.
 
-This implementation focuses on cards, but a similar pipeline could be applied to other financial products (e.g., loans, mortgages, insurance policies) where customer retention is critical.
+This implementation focuses on card products, but a similar pipeline could be applied to other financial products (e.g., loans, mortgages, insurance policies) where customer retention is critical.
 
-Our ultimate objective is to highlight how graph data science and Neo4j can be used to build effective churn prediction systems that go beyond standard tabular ML approaches, not to provide a production-ready solution or a fully validated model with a dataset with sufficient ground truth
+Our ultimate objective is to highlight how graph data science and Neo4j can be used to build effective churn prediction systems that go beyond standard tabular ML approaches, not to provide a production-ready solution or a fully validated model with a dataset with sufficient ground truth. What we present here is intended to give an initial foundation for further exploration and refinement, and an introduction to what is possible with graph-based machine learning for customer churn prediction.
 
 ## Method
 
@@ -70,7 +70,7 @@ The data is loaded into a Neo4j graph database with the following structure:
     *   `(:User)-[:OWNS]->(:Card)`
     *   `(:Card)-[:PERFORMED]->(:Transaction)`
     *   `(:Transaction)-[:TO]->(:Merchant)`
-*   **GDS Optimization:** A simplified relationship `(:User)-[:SHOPPED_AT {weight: count}]->(:Merchant)` is materialized to represent the strength of user-merchant interactions for efficient graph algorithms.
+*   **GDS Optimization:** A simplified relationship `(:User)-[:SHOPPED_AT {weight: count}]->(:Merchant)` is materialized to represent the strength of user-merchant interactions for efficient graph algorithms. This will further help capture user behavior patterns in the graph structure, and the relative importance of merchants to users.
 
 ### 3. Graph Data Science Pipeline ([`train-evaluate.ipynb`](train-evaluate.ipynb))
 The model training is performed entirely within Neo4j using the GDS Python Client:

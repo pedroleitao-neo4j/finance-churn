@@ -39,7 +39,9 @@ CALL {
         u.total_debt = toFloat(row.total_debt),
         u.credit_score = toInteger(row.credit_score),
         u.num_credit_cards = toInteger(row.num_credit_cards),
-        u.churned = toInteger(row.churned)
+        u.churned = toInteger(row.churned),
+        u.trend_count = toFloat(row.trend_count),
+        u.trend_amount = toFloat(row.trend_amount)
 
     // -----------------------------------------------------
     // Card & Ownership

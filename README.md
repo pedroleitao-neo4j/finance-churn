@@ -45,6 +45,7 @@ While effective, these methods often view customers in isolation. They miss the 
 2.  **Definition of Churn:** Since churn is silent, defining the target variable is subjective. Is a user churned after 30 days of silence? 90 days? 1 year? The definition heavily impacts model performance.
 3.  **Behavioral vs. Structural:** Some churn is purely behavioral (spending drops), while some is structural (life events like moving house). Graph features help capture structural changes better than simple spending tables.
 4.  **Inferred Labels:** As noted, the lack of an explicit "cancel" event means the ground truth labels are often synthetic (engineered based on rules) rather than observed facts.
+5.  **Lack of Temporal Features:** The current model uses a static snapshot of the graph where all historical transactions are aggregated into a single weight. It does not account for the *sequence* or *recency* of specific interactions within the graph topology (e.g., it cannot distinguish between a user who stopped transacting gradually vs. abruptly).
 
 ## Purpose of this Project
 

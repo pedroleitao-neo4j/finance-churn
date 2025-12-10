@@ -87,6 +87,7 @@ The model training is performed entirely within Neo4j orchestrated by the Neo4j 
     *   **PageRank:** Calculates node centrality/importance based on transaction flow.
     *   **Node Properties:** `yearly_income`, `total_debt`, `credit_score`.
     *   **Temporal Trends:** `trend_count` and `trend_amount` (comparing recent 30-day activity vs. previous 30-day activity).
+    *   **Geospatial Features:** `user_latitude` and `user_longitude`. Additionally, merchant locations are included in the FastRP embedding generation to capture spatial patterns in spending.
 *   **Model Training:**
     *   **Algorithm:** Random Forest Classifier (50 trees, max depth 5).
     *   **Pipeline:** `gds.beta.pipeline.nodeClassification`.
